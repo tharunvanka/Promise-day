@@ -6,7 +6,7 @@
 <title>Promise Day</title>
 
 <!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Allura&family=Cormorant+Garamond:ital,wght@1,400&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Cormorant+Garamond:ital,wght@1,400&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
 <style>
 * { box-sizing: border-box; }
@@ -20,14 +20,42 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background 1.5s ease;
   overflow: hidden;
+  transition: background 1.5s ease;
 }
 
+/* FINAL PAGE BACKGROUND */
 body.final-bg {
   background:
     linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
     url("promise.jpg") center / cover no-repeat;
+}
+
+/* Floating symbols */
+.floating {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+body.final-bg .floating {
+  opacity: 1;
+}
+
+.symbol {
+  position: absolute;
+  bottom: -20px;
+  font-size: 14px;
+  color: rgba(180,40,40,0.6);
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  to { transform: translateY(-120vh); opacity: 0; }
 }
 
 .container {
@@ -53,7 +81,7 @@ body.final-bg {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Text */
+/* Promise text */
 .promise {
   font-size: 22px;
   line-height: 1.7;
@@ -68,13 +96,13 @@ body.final-bg {
   line-height: 1.9;
 }
 
-/* NAME – FINAL UNIQUE STYLE */
+/* NAME – OPTION 1 (CHAMPAGNE GOLD) */
 .name {
   font-family: 'Dancing Script', cursive;
   font-size: 46px;
   margin-top: 20px;
-  color: #7b1e1e; /* deep maroon */
-  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  color: #E6C78A; /* champagne gold */
+  text-shadow: 0 2px 12px rgba(0,0,0,0.65);
 }
 
 /* Button */
@@ -94,40 +122,12 @@ button {
 button:hover {
   background: rgba(255,255,255,0.08);
 }
-
-/* Floating promise symbols */
-.floating {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
-body.final-bg .floating {
-  opacity: 1;
-}
-
-.symbol {
-  position: absolute;
-  bottom: -20px;
-  font-size: 14px;
-  color: rgba(180,40,40,0.6); /* soft red */
-  animation: floatUp linear infinite;
-}
-
-@keyframes floatUp {
-  from { transform: translateY(0); opacity: 0; }
-  10% { opacity: 0.6; }
-  to { transform: translateY(-120vh); opacity: 0; }
-}
 </style>
 </head>
 
 <body>
 
-<!-- Floating symbols -->
+<!-- Floating symbols (final page only) -->
 <div class="floating">
   <div class="symbol" style="left:12%; animation-duration:18s;">❤️</div>
   <div class="symbol" style="left:28%; animation-duration:22s;">✦</div>
@@ -180,7 +180,9 @@ body.final-bg .floating {
     <div class="promise final">
       These are my promises,
     </div>
-    <div class="name">Pranathi ❤️</div>
+
+    <div class="name">Pranathi Bab ❤️</div>
+
     <div class="promise final" style="margin-top:20px;">
       Happy Promise Day
     </div>
@@ -195,9 +197,11 @@ const pages = document.querySelectorAll('.page');
 function next() {
   pages[index].classList.remove('active');
   index++;
+
   if (index < pages.length) {
     pages[index].classList.add('active');
   }
+
   if (index === pages.length - 1) {
     document.body.classList.add("final-bg");
   }
