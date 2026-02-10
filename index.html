@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Promise Day 🤍</title>
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Allura&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Allura&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet">
 
 <style>
 * { box-sizing: border-box; }
@@ -20,13 +19,22 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background 1.2s ease;
+  transition: background 1.5s ease;
+  overflow: hidden;
+}
+
+body.final-bg {
+  background:
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    url("promise.jpg") center / cover no-repeat;
 }
 
 .container {
   width: 90%;
   max-width: 420px;
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 /* Pages */
@@ -51,12 +59,12 @@ body {
   letter-spacing: 0.3px;
 }
 
-/* Final page special */
+/* Final page style — visibly different */
 .final {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
-  line-height: 1.8;
-  letter-spacing: 0.6px;
+  font-style: italic;
+  letter-spacing: 0.8px;
+  line-height: 1.9;
 }
 
 .name {
@@ -83,16 +91,46 @@ button:hover {
   background: rgba(255,255,255,0.08);
 }
 
-/* FINAL PAGE BACKGROUND */
-body.final-bg {
-  background:
-    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-    url("promise.jpg") center / cover no-repeat;
+/* Floating promise symbols */
+.floating {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+body.final-bg .floating {
+  opacity: 1;
+}
+
+.symbol {
+  position: absolute;
+  bottom: -20px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  to { transform: translateY(-120vh); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
+
+<!-- Floating symbols -->
+<div class="floating">
+  <div class="symbol" style="left:10%; animation-duration:14s;">🤍</div>
+  <div class="symbol" style="left:30%; animation-duration:18s;">✦</div>
+  <div class="symbol" style="left:50%; animation-duration:16s;">🤍</div>
+  <div class="symbol" style="left:70%; animation-duration:20s;">✦</div>
+  <div class="symbol" style="left:85%; animation-duration:17s;">🤍</div>
+</div>
 
 <div class="container">
 
@@ -133,7 +171,7 @@ body.final-bg {
     <button onclick="next()">NEXT</button>
   </div>
 
-  <!-- PAGE 5 (FINAL) -->
+  <!-- FINAL PAGE -->
   <div class="page">
     <div class="promise final">
       These are my promises,
@@ -153,12 +191,9 @@ const pages = document.querySelectorAll('.page');
 function next() {
   pages[index].classList.remove('active');
   index++;
-
   if (index < pages.length) {
     pages[index].classList.add('active');
   }
-
-  // When final page loads, apply background
   if (index === pages.length - 1) {
     document.body.classList.add("final-bg");
   }
