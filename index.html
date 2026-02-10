@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promise Day 🤍</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Allura&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #1e1e1e, #0f0f0f);
+  font-family: 'Playfair Display', serif;
+  color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+}
+
+/* Page wrapper */
+.page {
+  display: none;
+  animation: pageIn 1.4s ease forwards;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Text */
+.promise {
+  font-size: 22px;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+}
+
+.name {
+  font-family: 'Allura', cursive;
+  font-size: 42px;
+  margin-top: 14px;
+}
+
+/* Button */
+button {
+  margin-top: 36px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  padding: 10px 26px;
+  border-radius: 30px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: rgba(255,255,255,0.08);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- PAGE 1 -->
+  <div class="page active">
+    <div class="promise">
+      I don’t promise perfection.<br>
+      I promise effort.
+    </div>
+    <button onclick="next()">NEXT</button>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page">
+    <div class="promise">
+      I promise honesty,<br>
+      even when the truth is uncomfortable.
+    </div>
+    <button onclick="next()">NEXT</button>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page">
+    <div class="promise">
+      I promise to be there —<br>
+      not only when things are easy.
+    </div>
+    <button onclick="next()">NEXT</button>
+  </div>
+
+  <!-- PAGE 4 -->
+  <div class="page">
+    <div class="promise">
+      I promise to choose you,<br>
+      again and again,<br>
+      in the small moments.
+    </div>
+    <button onclick="next()">NEXT</button>
+  </div>
+
+  <!-- PAGE 5 (FINAL) -->
+  <div class="page">
+    <div class="promise">
+      These are my promises,
+    </div>
+    <div class="name">Pranathi 🤍</div>
+    <div class="promise" style="margin-top:18px;font-size:18px;">
+      Happy Promise Day
+    </div>
+  </div>
+
+</div>
+
+<script>
+let index = 0;
+const pages = document.querySelectorAll('.page');
+
+function next() {
+  pages[index].classList.remove('active');
+  index++;
+  if (index < pages.length) {
+    pages[index].classList.add('active');
+  }
+}
+</script>
+
+</body>
+</html>
